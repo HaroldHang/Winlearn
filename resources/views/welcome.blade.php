@@ -30,18 +30,18 @@
     <meta content=black-translucent name=apple-mobile-web-app-status-bar-style>
     <meta content=roadmap.sh name=apple-mobile-web-app-title>
     <meta content=roadmap.sh name=application-name>
-    <link href="manifest/apple-touch-icon.png" rel=apple-touch-icon sizes=180x180>
+    <link href="/assets/manifest/apple-touch-icon.png" rel=apple-touch-icon sizes=180x180>
     <meta content=#101010 name=msapplication-TileColor>
     <meta content=#848a9a name=theme-color>
-    <link href="manifest/manifest.json" rel=manifest>
-    <link href="manifest/icon32.png" rel=icon type=image/png sizes=32x32>
-    <link href="manifest/icon16.png" rel=icon type=image/png sizes=16x16>
-    <link href="manifest/favicon.ico" rel="shortcut icon" type=image/x-icon>
-    <link href="manifest/favicon.ico" rel=icon type=image/x-icon>
+    <link href="/assets/manifest/manifest.json" rel=manifest>
+    <link href="/assets/manifest/icon32.png" rel=icon type=image/png sizes=32x32>
+    <link href="/assets/manifest/icon16.png" rel=icon type=image/png sizes=16x16>
+    <link href="/assets/manifest/favicon.ico" rel="shortcut icon" type=image/x-icon>
+    <link href="/assets/manifest/favicon.ico" rel=icon type=image/x-icon>
     <link href=https://www.google-analytics.com/ rel=preconnect>
     <link href=https://api.roadmap.sh/ rel=preconnect>
-    <link href="_astro/index.a6875348.css" rel=stylesheet />
-    <script src="_astro/hoisted.4999ff62.js" type=module></script>
+    <link href="/assets/_astro/index.a6875348.css" rel=stylesheet />
+    <script src="/assets/_astro/hoisted.4999ff62.js" type=module></script>
 </head>
 
 <body>
@@ -392,7 +392,7 @@
             </div>
             <div class="text-left max-w-[365px] sm:text-right"><a href=https://thenewstack.io target=_blank><img
                         alt=ThewNewStack class="mr-auto my-1.5 sm:ml-auto sm:mr-0" height=24.8
-                        src="images/tns-sm.png" width=200></a>
+                        src="/assets/images/tns-sm.png" width=200></a>
                 <p class="my-4 text-slate-300/60">The leading DevOps resource for Kubernetes, cloud-native
                     computing, and the latest in at-scale development, deployment, and management.</p>
                 <div class="text-gray-400 text-sm">
@@ -416,17 +416,17 @@
     }
 </style>
 <script>(self.Astro || (self.Astro = {})).idle = t => { let e = async () => { await (await t())() }; "requestIdleCallback" in window ? window.requestIdleCallback(e) : setTimeout(e, 200) }, window.dispatchEvent(new Event("astro:idle")), (() => { var t; { let e = { 0: t => t, 1: t => JSON.parse(t, r), 2: t => new RegExp(t), 3: t => new Date(t), 4: t => new Map(JSON.parse(t, r)), 5: t => new Set(JSON.parse(t, r)), 6: t => BigInt(t), 7: t => new URL(t), 8: t => new Uint8Array(JSON.parse(t)), 9: t => new Uint16Array(JSON.parse(t)), 10: t => new Uint32Array(JSON.parse(t)) }, r = (t, r) => { if ("" === t || !Array.isArray(r)) return r; let [s, i] = r; return s in e ? e[s](i) : void 0 }; customElements.get("astro-island") || customElements.define("astro-island", ((t = class extends HTMLElement { constructor() { super(...arguments), this.hydrate = () => { if (!this.hydrator || this.parentElement && this.parentElement.closest("astro-island[ssr]")) return; let t = this.querySelectorAll("astro-slot"), e = {}, s = this.querySelectorAll("template[data-astro-template]"); for (let t of s) { let r = t.closest(this.tagName); !r || !r.isSameNode(this) || (e[t.getAttribute("data-astro-template") || "default"] = t.innerHTML, t.remove()) } for (let r of t) { let t = r.closest(this.tagName); !t || !t.isSameNode(this) || (e[r.getAttribute("name") || "default"] = r.innerHTML) } let i = this.hasAttribute("props") ? JSON.parse(this.getAttribute("props"), r) : {}; this.hydrator(this)(this.Component, i, e, { client: this.getAttribute("client") }), this.removeAttribute("ssr"), window.removeEventListener("astro:hydrate", this.hydrate), window.dispatchEvent(new CustomEvent("astro:hydrate")) } } connectedCallback() { !this.hasAttribute("await-children") || this.firstChild ? this.childrenConnectedCallback() : new MutationObserver(((t, e) => { e.disconnect(), this.childrenConnectedCallback() })).observe(this, { childList: !0 }) } async childrenConnectedCallback() { window.addEventListener("astro:hydrate", this.hydrate); let t = this.getAttribute("before-hydration-url"); t && await import(t), this.start() } start() { let t = JSON.parse(this.getAttribute("opts")), e = this.getAttribute("client"); void 0 !== Astro[e] ? Astro[e]((async () => { let t = this.getAttribute("renderer-url"), [e, { default: r }] = await Promise.all([import(this.getAttribute("component-url")), t ? import(t) : () => () => { }]), s = this.getAttribute("component-export") || "default"; if (s.includes(".")) { this.Component = e; for (let t of s.split(".")) this.Component = this.Component[t] } else this.Component = e[s]; return this.hydrator = r, this.hydrate }), t, this) : window.addEventListener(`astro:${e}`, (() => this.start()), { once: !0 }) } attributeChangedCallback() { this.hydrator && this.hydrate() } }).observedAttributes = ["props"], t)) } })()</script>
-<astro-island client=idle component-export=PageProgress component-url=/_astro/PageProgress.331c9500.js
+<astro-island client=idle component-export=PageProgress component-url=//assets/_astro/PageProgress.331c9500.js
               opts={&quot;name&quot;:&quot;PageProgress&quot;,&quot;value&quot;:true}
-              props={&quot;initialMessage&quot;:[0,&quot;&quot;]} renderer-url=/_astro/client.99f345f1.js ssr=""
+              props={&quot;initialMessage&quot;:[0,&quot;&quot;]} renderer-url=//assets/_astro/client.99f345f1.js ssr=""
               uid=ZaNjW8></astro-island><astro-island client=idle component-export=CommandMenu
-                                                      component-url=/_astro/CommandMenu.d4ae8879.js
+                                                      component-url=//assets/_astro/CommandMenu.d4ae8879.js
                                                       opts={&quot;name&quot;:&quot;CommandMenu&quot;,&quot;value&quot;:true} props={}
-                                                      renderer-url=/_astro/client.99f345f1.js ssr="" uid=jOB4G></astro-island>
+                                                      renderer-url=//assets/_astro/client.99f345f1.js ssr="" uid=jOB4G></astro-island>
 <script>(self.Astro || (self.Astro = {})).load = async a => { await (await a())() }, window.dispatchEvent(new Event("astro:load"))</script>
-<astro-island client=load component-export=PageSponsor component-url=/_astro/PageSponsor.2fd53ee9.js
+<astro-island client=load component-export=PageSponsor component-url=//assets/_astro/PageSponsor.2fd53ee9.js
               opts={&quot;name&quot;:&quot;PageSponsor&quot;,&quot;value&quot;:true}
-              props={&quot;gaPageIdentifier&quot;:[0,&quot;roadmaps.html&quot;]} renderer-url=/_astro/client.99f345f1.js
+              props={&quot;gaPageIdentifier&quot;:[0,&quot;roadmaps.html&quot;]} renderer-url=//assets/_astro/client.99f345f1.js
               ssr="" uid=l3A18></astro-island>
 <script src="https://www.googletagmanager.com/gtag/js?id=UA-139582634-1" async></script>
 <script>function gtag() { dataLayer.push(arguments) } window.dataLayer = window.dataLayer || [], gtag("js", new Date), gtag("config", "UA-139582634-1")</script>
