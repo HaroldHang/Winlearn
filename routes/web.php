@@ -19,4 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
     return view('pages.index');
-});
+})->name("home");
+
+Route::get('/language', function() {
+    return view('pages.language');
+})->name("languages");
+
+Route::get('/login', function(){
+    return view('pages.login');
+})->name('login');
+
+Route::get('/signup', function(){
+    return view('pages.signup');
+})->name('signup');

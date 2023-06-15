@@ -1,11 +1,11 @@
 <div class="py-5 sm:py-8 text-white">
     <nav class="flex items-center justify-between container">
-        <a href="index.html" class="logo-design" aria-label=roadmap.sh>
+        <a href="{{ route('home')}}" class="logo-design" aria-label=roadmap.sh>
             Win<span class="text-indigo-800 ">Learn</span>
         </a>
-        <ul class="hidden sm:flex sm:items-center space-x-5 text-slate-800">
+        {{-- <ul class="hidden sm:flex sm:items-center space-x-5 text-slate-800">
             <li>
-                <a href="roadmaps.html" class="nav-link">Languages</a>
+                <a href="{{ route('languages')}}" class="nav-link">Languages</a>
             </li>
             <li>
                 <a href="best-practices.html" class="nav-link">Ressources</a>
@@ -13,17 +13,13 @@
             <li class="hidden lg:inline">
                 <a href="guides.html" class="nav-link">Contact</a>
             </li>
-            {{-- <li class="hidden lg:inline">
-                <a href="videos.html" class="hover:text-white text-gray-400">Videos</a>
-            </li> --}}
-
-        </ul>
-        <ul class="items-center h-8 gap-5 justify-end sm:flex w-[172px]">
+        </ul> --}}
+        <ul class="items-center h-8 gap-2 justify-end sm:flex">
             <li  data-guest-required>
-                <a href="login.html" class="my-btn">Login</a>
+                <a href="{{route('login')}}" class="my-btn">Login</a>
             </li>
             <li>
-                <div class="hidden relative" data-auth-required>
+                {{-- <div class="hidden relative" data-auth-required>
                     <button class="flex items-center font-medium text-white bg-gradient-to-r h-8 justify-center px-4 py-2 rounded-full text-sm w-28 from-purple-500 hover:from-purple-500 hover:to-purple-600 to-purple-700" type=button data-account-button>
                         <span class="inline-flex items-center gap-1.5">Account
                             <svg viewBox="0 0 24 24" class="h-3 w-3 relative stroke-[3px] top-[0.5px]" xmlns=http://www.w3.org/2000/svg fill=none stroke=currentColor stroke-width=1.5>
@@ -41,8 +37,8 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <a href="signup.html" class="flex items-center font-medium text-white bg-gradient-to-r h-8 justify-center px-4 py-2 rounded-full text-sm w-28 cursor-pointer from-blue-500 hidden hover:from-blue-500 hover:to-blue-600 to-blue-700" data-guest-required>
+                </div> --}}
+                <a href="{{route('signup')}}" class="my-btn-state" data-guest-required>
                     <span>Sign Up</span>
                 </a>
             </li>

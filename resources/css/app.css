@@ -33,7 +33,11 @@ body {
     border-b-[#1e293c]
 */
 .my-btn {
-    @apply bg-indigo-700 text-white px-3 py-2 rounded-md hover:bg-slate-600;
+    @apply border-indigo-700 border-2 bg-indigo-700 text-white px-3 py-2 rounded-md block hover:-translate-y-1 transition-transform cursor-pointer;
+}
+
+.my-btn-state {
+    @apply text-indigo-700 border-indigo-700 border-2 px-3 py-2 rounded-md hover:-translate-y-1 transition-transform block cursor-pointer;
 }
 
 .nav-link {
@@ -60,4 +64,81 @@ body {
 
 .popul-link .btn-follow {
     @apply text-xs hidden capitalize sm:block bg-indigo-700 text-white px-2 py-1 rounded-md
+}
+
+.concept-ctn {
+    max-width: 95vw;
+}
+.concept-start {
+    @apply text-indigo-800 font-medium text-2xl border-none hover:bg-indigo-800 hover:text-white no-underline p-4 relative sm:p-3.5 flex justify-center
+}
+.concept-single {
+    @apply text-indigo-800 font-medium text-base bg-slate-200 rounded-br-xl rounded-tl-xl  border-indigo-800 border-2 hover:bg-indigo-800 hover:text-white no-underline p-4 relative sm:p-3.5 flex gap-2 items-center
+}
+.concept-single .dash {
+    @apply w-3 h-1 bg-indigo-800 rounded-full
+}
+.concept-single:hover .dash {
+    @apply bg-white
+}
+
+.concept-desc {
+    @apply bg-white rounded-lg  px-2 py-2 shadow-xl
+}
+.concept-title {
+    @apply text-slate-800 font-semibold text-xl mb-4
+}
+.concept-short {
+    @apply text-slate-800 text-sm leading-tight
+}
+.concept-link-enter {
+    @apply text-slate-800 text-sm leading-tight my-1
+}
+.concept-link {
+    @apply text-sm text-slate-800;
+    margin-block-start: 0;
+    padding-inline-start: 0;
+    margin-left: 1rem;
+}
+.concept-link li {
+    @apply my-2 pl-2
+}
+.concept-link a {
+    @apply leading-tight underline
+}
+
+.auth-ctn {
+    @apply bg-white rounded-lg  px-8 py-5 shadow-xl mx-auto
+}
+
+.form-single {
+    @apply flex flex-col gap-1 justify-start items-start
+}
+.form-single label {
+    @apply font-medium text-base text-slate-800
+}
+.form-single input {
+    @apply h-8 w-full border-2 border-indigo-200 rounded-md outline-none pl-2 py-2 text-sm
+}
+.form-single input:focus {
+    @apply border-indigo-800 border-2
+}
+.form-single input::placeholder {
+    @apply text-sm
+}
+.form-single span{
+    @apply text-xs text-red-700 font-medium
+}
+.form-submit {
+    @apply flex justify-center items-center
+}
+.form-submit button{
+    @apply text-base hover:-translate-y-1 hover:shadow-sm
+}
+
+.special-form-content {
+    @apply flex justify-end text-xs text-slate-800
+}
+.special-form-content a{
+    @apply underline hover:text-indigo-700
 }
