@@ -32,6 +32,8 @@ body {
     bg-gradient-to-b from-amber-50 to-purple-500
     border-b-[#1e293c]
 */
+
+
 .my-btn {
     @apply border-indigo-700 border-2 bg-indigo-700 text-white px-3 py-2 rounded-md block hover:-translate-y-1 transition-transform cursor-pointer;
 }
@@ -41,22 +43,91 @@ body {
 }
 
 .nav-link {
-    @apply text-slate-800;
+    @apply text-slate-800 leading-tight w-24 text-center;
+    position: relative;
+    display: block;
+}
+.nav-link:hover {
+    @apply text-indigo-800;
+}
+.nav-link:hover::after {
+    position: absolute;
+    content : '';
+    @apply rounded-ee-full rounded-ss-full bg-indigo-700 h-1 w-7 top-full left-1/2 -translate-x-1/2;
+}
+
+.profile-ctn {
+    @apply w-10 h-10;
+}
+.profile-ctn .avatar-ctn{
+    @apply rounded-full p-1 bg-indigo-200 cursor-pointer;
 }
 
 .title-headline {
     @apply text-indigo-700  rounded-lg text-2xl font-medium flex flex-col w-fit;
+    position: relative;
 }
 .title-headline .line {
     @apply h-1 w-1/2 rounded-ee-full bg-indigo-700;
 }
 
+.title-headline .line-right {
+    @apply h-1 w-1/2 translate-x-full rounded-es-full bg-indigo-700;
+}
+
+.title-headline .line-center {
+    @apply h-1 w-20 -translate-x-1/2 rounded-es-full rounded-ee-full bg-indigo-700;
+    position: relative;
+    left: 50%;
+}
+
+
 .language-ctn {
-    @apply text-indigo-800 font-medium bg-slate-200 rounded-br-xl rounded-tl-xl  block border-indigo-800 border-2 hover:bg-indigo-800 hover:text-white no-underline p-4 relative sm:p-3.5 flex justify-between items-center
+    @apply text-indigo-800 font-medium bg-slate-200 rounded-br-xl rounded-tl-xl  block border-indigo-800 border-2 hover:bg-indigo-800 hover:text-white no-underline p-4 relative sm:p-3.5 flex justify-center items-center
 }
 .language-ctn .icon-lang {
     @apply h-6 w-6
 }
+
+
+/* Home Page */
+
+.features, .team-ctn {
+    @apply grid sm:grid-cols-3 gap-5
+}
+.features > div, .team-ctn > div {
+    @apply bg-white rounded-lg  px-4 py-2 hover:shadow-xl hover:-translate-y-4 flex flex-col items-center gap-6 transition-transform transition-shadow duration-500 ease-in-out ;
+}
+.features > div h3, .team-ctn > div h3, .team-ctn > div h4 {
+    @apply font-medium text-xl text-indigo-800 text-center
+}
+.features .feature-img {
+    position: relative;
+    @apply w-20 mx-auto mix-blend-multiply  -hue-rotate-60;
+}
+.features .feature-img img{
+    @apply relative;
+}
+.features > div p, .team-ctn > div p {
+    @apply text-slate-800 text-base leading-tight text-center
+}
+
+.team-ctn {
+    @apply sm:grid-cols-6 content-center;
+}
+.team-ctn > div {
+    @apply gap-2 hover:drop-shadow-lg hover:shadow-none ;
+}
+.team-ctn .feature-img {
+    @apply w-32 rounded-full p-1 bg-slate-200;
+}
+.team-ctn > div h3 {
+    @apply text-slate-800
+}
+.team-ctn > div h4 {
+    @apply text-base
+}
+/* App Home Page */
 
 .popul-link {
     @apply block no-underline border-2 border-indigo-200 rounded-md flex hover:text-indigo-700 items-center justify-between py-2 px-2 text-slate-800 my-2
@@ -106,6 +177,35 @@ body {
 .concept-link a {
     @apply leading-tight underline
 }
+
+/* Projects Page */
+
+.project-ctn {
+    @apply bg-white rounded-lg  px-6 py-2 hover:shadow-xl transition-shadow flex flex-col gap-3
+}
+.project-title {
+    @apply text-indigo-800 font-medium text-xl mb-4
+}
+
+.project-banner {
+    @apply w-full rounded-lg overflow-hidden;
+}
+.project-banner img{
+    @apply relative;
+}
+.project-short {
+    @apply text-slate-800 text-sm leading-tight
+}
+.project-link {
+    @apply text-sm flex justify-center gap-2;
+}
+.project-link a {
+    @apply w-8 h-8 block relative text-indigo-800 hover:text-white hover:bg-indigo-800 p-1 rounded-full;
+}
+.project-link a svg{
+    @apply w-full h-full;
+}
+/* Authenication Pages */
 
 .auth-ctn {
     @apply bg-white rounded-lg  px-8 py-5 shadow-xl mx-auto

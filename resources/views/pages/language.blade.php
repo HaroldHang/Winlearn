@@ -23,7 +23,7 @@
             <a class="my-btn w-fit mt-2">
                 <span>Get the pdf</span>
             </a>
-            <a class="my-btn-state w-fit mt-2">
+            <a class="my-btn-state w-fit mt-2" href="{{ route('projects')}}">
                 <span>Visit projects</span>
             </a>
         </div>
@@ -31,7 +31,7 @@
 </div>
 <div class="py-10 relative sm:py-14 bg-gray-200 sm:pt-2">
     <div class="container concept-ctn">
-        <h2 class="left-0 mb-7 px-3 py-1  sm:left-1/2 title-headline">Learn the concepts
+        <h2 class="mb-7 px-3 py-1 title-headline">Learn the concepts
             <div class="line"></div>
         </h2>
         <div class="flex justify-between gap-5">
@@ -96,7 +96,7 @@
 
 <div class="py-10 relative sm:py-14">
     <div class=container>
-        <h2 class="left-0 mb-7 px-3 py-1  sm:left-1/2 title-headline">More Links
+        <h2 class="mb-7 px-3 py-1 title-headline">More Links
             <div class="line"></div>
         </h2>
         <div class="mt-3 sm:my-5 px-3">

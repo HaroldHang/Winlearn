@@ -1,11 +1,11 @@
 <div class="py-5 sm:py-8 text-white">
-    <nav class="flex items-center justify-between container">
+    <nav class="flex items-center container justify-evenly">
         <a href="{{ route('home')}}" class="logo-design" aria-label=roadmap.sh>
             Win<span class="text-indigo-800 ">Learn</span>
         </a>
-        {{-- <ul class="hidden sm:flex sm:items-center space-x-5 text-slate-800">
+        <ul class="hidden sm:flex sm:items-center space-x-5 text-slate-800 justify-center">
             <li>
-                <a href="{{ route('languages')}}" class="nav-link">Languages</a>
+                <a href="{{ route('languages')}}" class="nav-link">Home</a>
             </li>
             <li>
                 <a href="best-practices.html" class="nav-link">Ressources</a>
@@ -13,7 +13,7 @@
             <li class="hidden lg:inline">
                 <a href="guides.html" class="nav-link">Contact</a>
             </li>
-        </ul> --}}
+        </ul>
         <ul class="items-center h-8 gap-2 justify-end sm:flex">
             <li  data-guest-required>
                 <a href="{{route('login')}}" class="my-btn">Login</a>
@@ -42,6 +42,11 @@
                     <span>Sign Up</span>
                 </a>
             </li>
+            <div class="profile-ctn">
+                <div class="avatar-ctn">
+                    <img src="/assets/images/default-avatar.png"/>
+                </div>
+            </div>
         </ul>
         <button class="block sm:hidden text-gray-400 cursor-pointer hover:text-gray-50" aria-label=Menu data-show-mobile-nav>
             <svg viewBox="0 0 24 24" class="h-5 w-5" focusable=false aria-hidden=true>

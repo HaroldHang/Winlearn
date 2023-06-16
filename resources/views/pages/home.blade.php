@@ -12,23 +12,24 @@
 @section('content')
 
 <div class="">
-    <div class="container pb-14 px-6 py-6 sm:px-0 sm:py-20 sm:text-center text-left">
-        <h1 class="font-bold text-2xl sm:text-5xl bg-clip-text mb-2 sm:mb-4 text-color-prime">No more complaining from Developers</h1>
-        <p class="hidden sm:block px-4 text-write text-lg">
-            Empowering Developers to Win Their Coding Journey with the Ultimate Resource Hub.
+    <div class="container pb-8 px-6 py-6 sm:px-0 sm:py-12 text-left">
+        <h1 class="font-bold text-2xl sm:text-3xl bg-clip-text mb-2 text-color-prime px-4">Welcome Harold!</h1>
+        <p class="hidden sm:block px-4 text-write text-base">
+            To get started pick up a language of your choice below
         </p>
         <p class="block text-md px-0 sm:hidden text-gray-400">Community created roadmaps, guides and articles to help developers grow in their career.
         </p>
     </div>
 </div>
-<div class=" py-10 relative sm:py-14">
+<div class=" py-10 relative sm:py-8">
     <div class=container>
-        <h2 class="left-0 mb-7 px-3 py-1  sm:left-1/2 title-headline">Popular Languages
+        <h2 class="mb-7 px-3 py-1 title-headline">Popular Languages
             <div class="line"></div>
         </h2>
         <ul class="px-3 gap-5 grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2">
             <li>
-                <a href="frontend.html" class="language-ctn group"><span>Python</span> <ion-icon name="logo-python" class="icon-lang"></ion-icon>
+                <a href="frontend.html" class="language-ctn group"><span>Python</span>
+                    {{-- <ion-icon name="logo-python" class="icon-lang"></ion-icon> --}}
                 </a>
             </li>
             <li>
@@ -44,7 +45,7 @@
             <li>
                 <a href="full-stack.html" class="language-ctn group">
                     <span>Css</span>
-                    <span class="flex items-center font-medium absolute bottom-1.5 right-2 rounded-br rounded-tl text-xs text-purple-300">
+                    {{-- <span class="flex items-center font-medium absolute bottom-1.5 right-2 rounded-br rounded-tl text-xs text-purple-300">
                         <span class="flex h-2 mr-1.5 w-2">
                             <span class="h-2 w-2 inline-flex rounded-full absolute animate-ping opacity-75 bg-purple-400"></span>
                             <span class="h-2 w-2 inline-flex rounded-full relative bg-purple-500">
@@ -52,7 +53,7 @@
                             </span>
                         </span>
                         New
-                    </span>
+                    </span> --}}
                 </a>
             </li>
             <li>
@@ -71,7 +72,7 @@
 
 <div class="py-10 relative sm:py-14">
     <div class=container>
-        <h2 class="left-0 mb-7 px-3 py-1  sm:left-1/2 title-headline">Popular Links
+        <h2 class="mb-7 px-3 py-1 title-headline">Popular Links
             <div class="line"></div>
         </h2>
         <div class="mt-3 sm:my-5 px-3">

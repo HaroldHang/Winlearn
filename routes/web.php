@@ -32,3 +32,12 @@ Route::get('/login', function(){
 Route::get('/signup', function(){
     return view('pages.signup');
 })->name('signup');
+
+Route::get('/home', function(){
+    return view('pages.home');
+})->name('home-app');
+
+Route::get('/projects', function(){
+    return view('pages.projects');
+})->name('projects');
+

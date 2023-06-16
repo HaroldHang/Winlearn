@@ -9,6 +9,7 @@
 
     </style>
     @yield('template-header')
+
 </head>
 
 <body class="">
@@ -30,7 +31,9 @@
 
     <!-- Custom footer script -->
     @yield('template-footer')
-
+    {{-- <script type="module" src="http://localhost:/@vite/client"></script> --}}
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/index.js"></script>
 </body>
 
 </html>
