@@ -9,7 +9,7 @@ The struggle to find the right ressources or the best way to learn a programming
 Our team is composed of two coding lovers and currently in ALX software engineering program
 
 - **Harold Adjahi** [@Harold Adjahi](https://laravel.com/docs/routing) : A passionate tech enthusiast and biomedical engineer at free time.
-- **Arnaud Fifonsi** [@Arnaud Fifonsi](https://laravel.com/docs/container).
+- **Arnaud Lokonon** [@Arnaud Lokonon](https://laravel.com/docs/container).
 
 
 ## Get started with WinLearn
