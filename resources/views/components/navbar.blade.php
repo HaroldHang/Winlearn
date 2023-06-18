@@ -14,6 +14,7 @@
                 <a href="guides.html" class="nav-link">Contact</a>
             </li>
         </ul>
+        @if(!Auth::check())
         <ul class="items-center h-8 gap-2 justify-end sm:flex">
             <li  data-guest-required>
                 <a href="{{route('login')}}" class="my-btn">Login</a>
@@ -48,6 +49,7 @@
                 </div>
             </div>
         </ul>
+        @endif
         <button class="block sm:hidden text-gray-400 cursor-pointer hover:text-gray-50" aria-label=Menu data-show-mobile-nav>
             <svg viewBox="0 0 24 24" class="h-5 w-5" focusable=false aria-hidden=true>
                 <path d="M 3 5 A 1.0001 1.0001 0 1 0 3 7 L 21 7 A 1.0001 1.0001 0 1 0 21 5 L 3 5 z M 3 11 A 1.0001 1.0001 0 1 0 3 13 L 21 13 A 1.0001 1.0001 0 1 0 21 11 L 3 11 z M 3 17 A 1.0001 1.0001 0 1 0 3 19 L 21 19 A 1.0001 1.0001 0 1 0 21 17 L 3 17 z" fill=currentColor></path>
