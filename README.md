@@ -15,6 +15,10 @@ Our team is composed of two coding lovers and currently in ALX software engineer
 ## Get started with WinLearn
 Here is how to use our app
 
+### First Sign up
+![signup](https://i.imgur.com/CwlBgWN.png)
+### Explore our content
+![welcome](https://i.imgur.com/v1v1m50.png)
 
 ## Architecture
 Our app is build with Laravel Framwork. It is use blade templating for rendering page in front end. We have coupled it with CSS and Javascript for building a richful frontend. The server side is handle by php with the laravel ecosytem. Then use have use MySQL as the database server to store the datas of the app.
