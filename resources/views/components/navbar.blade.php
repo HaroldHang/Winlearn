@@ -1,21 +1,32 @@
-<div class="py-5 sm:py-8 text-white">
-    <nav class="flex items-center container justify-evenly">
-        <a href="{{ route('home')}}" class="logo-design" aria-label=roadmap.sh>
+<div class="py-5 sm:py-8 text-white px-4 sm:px-0">
+    <nav class="flex items-center justify-between sm:max-w-screen-lg mx-auto">
+        <a href="{{ !Auth::check() ? route('home') : route('home-app')}}" class="logo-design" aria-label=roadmap.sh>
             Win<span class="text-indigo-800 ">Learn</span>
         </a>
+        @if(!Auth::check())
         <ul class="hidden sm:flex sm:items-center space-x-5 text-slate-800 justify-center">
             <li>
-                <a href="{{ route('languages')}}" class="nav-link">Home</a>
+                <a href="{{ route('home')}}" class="nav-link">Home</a>
             </li>
             <li>
-                <a href="best-practices.html" class="nav-link">Ressources</a>
+                <a href="#" class="nav-link">Ressources</a>
             </li>
             <li class="hidden lg:inline">
-                <a href="guides.html" class="nav-link">Contact</a>
+                <a href="#" class="nav-link">Contact</a>
             </li>
         </ul>
-        @if(!Auth::check())
-        <ul class="items-center h-8 gap-2 justify-end sm:flex">
+        @else
+        <ul class="hidden sm:flex sm:items-center space-x-5 text-slate-800 justify-center">
+            <li>
+                <a href="{{ route('home-app')}}" class="nav-link">Home</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">Projects</a>
+            </li>
+        </ul>
+        @endif
+        <ul class="items-center h-8 gap-2 sm:justify-end flex">
+            @if(!Auth::check())
             <li  data-guest-required>
                 <a href="{{route('login')}}" class="my-btn">Login</a>
             </li>
@@ -43,14 +54,20 @@
                     <span>Sign Up</span>
                 </a>
             </li>
-            <div class="profile-ctn">
+            @else
+            <li class="profile-ctn" id="profile-ctn">
                 <div class="avatar-ctn">
                     <img src="/assets/images/default-avatar.png"/>
                 </div>
-            </div>
+                <div class="profile-drop" id="profile-drop">
+                    <span class="text-center px-4">{{ $user->username }}</span>
+                    <a><i data-lucide="settings"></i> Profile</a>
+                    <a href="/logout"><i data-lucide="log-out"></i> Logout</a>
+                </div>
+            </li>
+            @endif
         </ul>
-        @endif
-        <button class="block sm:hidden text-gray-400 cursor-pointer hover:text-gray-50" aria-label=Menu data-show-mobile-nav>
+        {{-- <button class="block sm:hidden text-gray-400 cursor-pointer hover:text-gray-50" aria-label=Menu data-show-mobile-nav>
             <svg viewBox="0 0 24 24" class="h-5 w-5" focusable=false aria-hidden=true>
                 <path d="M 3 5 A 1.0001 1.0001 0 1 0 3 7 L 21 7 A 1.0001 1.0001 0 1 0 21 5 L 3 5 z M 3 11 A 1.0001 1.0001 0 1 0 3 13 L 21 13 A 1.0001 1.0001 0 1 0 21 11 L 3 11 z M 3 17 A 1.0001 1.0001 0 1 0 3 19 L 21 19 A 1.0001 1.0001 0 1 0 21 17 L 3 17 z" fill=currentColor></path>
             </svg>
@@ -87,6 +104,6 @@
                     <a href="signup.html" class="hidden md:text-lg text-xl hover:text-green-400 text-green-300" data-guest-required>Sign Up</a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
     </nav>
 </div>

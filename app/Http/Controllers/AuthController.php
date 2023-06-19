@@ -12,15 +12,17 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $this->validate($request, [
+
+        $credentials = $this->validate($request, [
             'username' => 'required',
             'password' => 'required'
         ]);
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'statut' => true])) {
-            return redirect('/home');
+        if (Auth::attempt($credentials)) {
+            $request -> session()->regenerate();
+            return redirect()->intended('/home');
         }
-        session()->flash('error', 'Les informations de connexion sont incorrectes.');
-        return redirect('/home');
+        session()->flash('error', 'Invalid Credentials');
+        return redirect('/login');
     }
 
     public function register(Request $request)
@@ -29,7 +31,6 @@ class AuthController extends Controller
             'username' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
-
         ]);
 
         if ($validator->fails()) {
@@ -43,8 +44,16 @@ class AuthController extends Controller
         $user->username = $validatedData['username'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
-        $user->statut = true;
+        //$user->statut = true;
         $user->save();
+        Auth::login($user);
         return redirect('/home');
+    }
+
+    public function destroy(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

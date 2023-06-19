@@ -10,7 +10,7 @@
             </a>
         </p> --}}
         <div class="flex flex-col sm:flex-row gap-12 justify-center">
-            <div class=max-w-[50vw]>
+            <div class=sm:max-w-[50vw]>
                 <p class="flex items-center justify-center text-md">
                     <a href="{{ route('home')}}" class="logo-design" aria-label=roadmap.sh>
                         Win<span class="text-indigo-800 ">Learn</span>
