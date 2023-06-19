@@ -4,34 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
+
+        $credentials = $this->validate($request, [
+            'username' => 'required',
             'password' => 'required'
         ]);
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'statut' => true])) {
-            return redirect()->intended('/dashboard');
+        if (Auth::attempt($credentials)) {
+            $request -> session()->regenerate();
+            return redirect()->intended('/home');
         }
-        session()->flash('error', 'Les informations de connexion sont incorrectes.');
-        return redirect()->back();
+        session()->flash('error', 'Invalid Credentials');
+        return redirect('/login');
     }
 
     public function register(Request $request)
     {
-        #dd($request->photo);
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'username' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
-            'role' => 'required',
-            'phone' => 'required|unique:users',
-            'adresse' => 'nullable',
-            'photo' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -42,13 +41,19 @@ class AuthController extends Controller
         }
         $validatedData = $validator->validated();
         $user = new User;
-        $user->first_name = $validatedData['first_name'];
-        $user->last_name = $validatedData['last_name'];
+        $user->username = $validatedData['username'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
-        $user->statut = true;
-        $user->profile_photo = $this->treatPhoto($request);
+        //$user->statut = true;
         $user->save();
-        return redirect()->route('userlist');
+        Auth::login($user);
+        return redirect('/home');
+    }
+
+    public function destroy(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }
