@@ -20,5 +20,5 @@ Here is how to use our app
 Our app is build with Laravel Framwork. It is use blade templating for rendering page in front end. We have coupled it with CSS and Javascript for building a richful frontend. The server side is handle by php with the laravel ecosytem. Then use have use MySQL as the database server to store the datas of the app.
 ### Overview
 Here is what our Architecture look like
-[web-architecture](https://imgur.com/a/w3LcH0y)
+![web-architecture](https://imgur.com/a/w3LcH0y)
 
