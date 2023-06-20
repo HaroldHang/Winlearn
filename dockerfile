@@ -72,10 +72,10 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 # Copy start.sh script and define default command for the container
 COPY ./scripts/start.sh /start.sh
 RUN chmod +x start.sh
-RUN ls /etc && ps
+RUN ls /etc/nginx && ps
 RUN cat ${nginx_vhost}
-RUN systemd nginx restart
-RUN systemd mysql restart
+RUN systemd restart nginx
+RUN systemd restart mysql
 
 WORKDIR /var/www/winlearn
 RUN ls && pwd
