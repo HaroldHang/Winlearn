@@ -82,6 +82,6 @@ RUN ls && pwd
 RUN composer install
 # Expose Port for the Application
 #EXPOSE 80
-#EXPOSE 443
+EXPOSE 443
 
 CMD ["./start.sh"]
