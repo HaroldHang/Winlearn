@@ -74,8 +74,8 @@ COPY ./scripts/start.sh /start.sh
 RUN chmod +x start.sh
 RUN ls /etc && ps
 RUN cat ${nginx_vhost}
-RUN nginx -s reload
-RUN service mysql restart
+RUN systemd nginx restart
+RUN systemd mysql restart
 
 WORKDIR /var/www/winlearn
 RUN ls && pwd
