@@ -15,10 +15,11 @@ RUN apt update
 RUN apt upgrade -y
 
 # Install nginx, php-fpm and supervisord from ubuntu repository
-RUN apt install -y nginx php-fpm supervisor wget
+RUN apt install -y nginx php-fpm supervisor
 RUN apt-get install -y \
     git \
     curl \
+    wget \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
@@ -36,9 +37,9 @@ RUN apt-get install -y mysql-server
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+#RUN useradd -G www-data,root -u $uid -d /home/$user $user
+#RUN mkdir -p /home/$user/.composer && \
+#    chown -R $user:$user /home/$user
 
 # Define the ENV variable
 ENV nginx_vhost /etc/nginx/sites-available/default
@@ -70,7 +71,7 @@ RUN chmod +x start.sh
 CMD ["./start.sh"]
 
 WORKDIR /var/www/winlearn
-RUN composer install
+#RUN composer install
 
 # Expose Port for the Application
 EXPOSE 80 443 22 3306
