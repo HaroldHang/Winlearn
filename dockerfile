@@ -31,8 +31,8 @@ RUN apt-get install -y \
 
 RUN rm -rf /var/lib/apt/lists/*
 #RUN rm -rf mysql_all.deb
+RUN apt install mysql-server
 RUN apt clean
-RUN apt install -y mysql-server
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
