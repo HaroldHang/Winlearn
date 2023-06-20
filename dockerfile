@@ -72,7 +72,7 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 # Copy start.sh script and define default command for the container
 COPY ./scripts/start.sh /start.sh
 RUN chmod +x start.sh
-RUN ps
+RUN ls /etc && ps
 RUN cat ${nginx_vhost}
 RUN nginx -s reload
 RUN service mysql restart
