@@ -76,8 +76,8 @@ RUN chmod +x start.sh
 WORKDIR /var/www/winlearn
 RUN ls && pwd
 RUN composer install
-RUN systemctl restart nginx
-RUN systemctl restart mysql
+RUN service nginx restart
+RUN service mysql restart
 RUN cat ${nginx_conf}
 # Expose Port for the Application
 #EXPOSE 80
