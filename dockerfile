@@ -67,13 +67,13 @@ RUN chown -R www-data:www-data /var/www/winlearn
 COPY  . /var/www/winlearn
 COPY ./.env.example /var/www/winlearn/.env
 # Volume configuration
-VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html", "/var/run"]
 
 # Copy start.sh script and define default command for the container
 COPY ./scripts/start.sh /start.sh
 RUN chmod +x start.sh
-RUN nginx -s reload
 RUN cat ${nginx_conf}
+RUN nginx -s reload
 RUN service mysql restart
 
 WORKDIR /var/www/winlearn
