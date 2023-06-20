@@ -72,11 +72,13 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 # Copy start.sh script and define default command for the container
 COPY ./scripts/start.sh /start.sh
 RUN chmod +x start.sh
-CMD ["./start.sh"]
 
 WORKDIR /var/www/winlearn
 RUN ls && pwd
 RUN composer install
 
 # Expose Port for the Application
-EXPOSE 80 443
+EXPOSE 80
+EXPOSE 443
+
+CMD ["./start.sh"]
