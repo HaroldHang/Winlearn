@@ -36,10 +36,10 @@ RUN apt-get install -y mysql-server
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create system user to run Composer and Artisan Commands
-#RUN useradd -G www-data,root -u $uid -d /home/$user $user
-#RUN mkdir -p /home/$user/.composer && \
-#    chown -R $user:$user /home/$user
+Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
 # Define the ENV variable
 ENV nginx_vhost /etc/nginx/sites-available/default
@@ -71,7 +71,7 @@ RUN chmod +x start.sh
 CMD ["./start.sh"]
 
 WORKDIR /var/www/winlearn
-#RUN composer install
+RUN composer install
 
 # Expose Port for the Application
 EXPOSE 80 443 22 3306
