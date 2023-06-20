@@ -74,7 +74,7 @@ COPY ./scripts/start.sh /start.sh
 RUN chmod +x start.sh
 RUN ls /etc/init.d && ps
 RUN cat ${nginx_vhost}
-RUN /etc/init.d/docker restart nginx
+RUN /etc/init.d/nginx -s reload
 RUN systemd restart mysql
 
 WORKDIR /var/www/winlearn
