@@ -79,4 +79,4 @@ RUN ls && pwd
 RUN composer install
 
 # Expose Port for the Application
-EXPOSE 80 443 22 3306
+EXPOSE 80 443
