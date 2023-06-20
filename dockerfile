@@ -72,13 +72,13 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 # Copy start.sh script and define default command for the container
 COPY ./scripts/start.sh /start.sh
 RUN chmod +x start.sh
+RUN nginx -s reload
+RUN cat ${nginx_conf}
+RUN service mysql restart
 
 WORKDIR /var/www/winlearn
 RUN ls && pwd
 RUN composer install
-RUN service nginx restart
-RUN service mysql restart
-RUN cat ${nginx_conf}
 # Expose Port for the Application
 #EXPOSE 80
 #EXPOSE 443
