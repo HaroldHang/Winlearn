@@ -26,12 +26,12 @@ RUN apt-get install -y \
     libxml2-dev \
     zip \
     unzip
+RUN apt install mysql-server
 #RUN wget -O mysql_all.deb https://dev.mysql.com/get/mysql-apt-config_0.8.18-1_all.deb
 #RUN dpkg -i mysql_all.deb
 
 RUN rm -rf /var/lib/apt/lists/*
 #RUN rm -rf mysql_all.deb
-RUN apt install mysql-server
 RUN apt clean
 
 # Get latest Composer
