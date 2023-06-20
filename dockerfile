@@ -20,6 +20,7 @@ RUN apt-get install -y \
     git \
     curl \
     wget \
+    dpkg \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
