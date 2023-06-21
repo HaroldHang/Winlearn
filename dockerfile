@@ -34,7 +34,7 @@ RUN apt install php8.1-common php8.1-mysql php8.1-xml php8.1-xmlrpc php8.1-curl 
 RUN touch ~/.bashrc && chmod +x ~/.bashrc
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 RUN . ~/.nvm/nvm.sh && . ~/.bashrc
-RUN nvm install v18.14.0
+RUN . ~/.nvm/nvm.sh install v18.14.0
 #RUN apt -y install nodejs
 RUN node -v
 RUN npm -v
