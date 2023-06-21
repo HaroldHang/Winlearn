@@ -111,7 +111,7 @@ ENV DB_PASSWORD wintodev2023
 #RUN /etc/init.d/mysql status
 RUN printenv
 RUN php artisan key:generate && \
-php artisan migrate && \
+php artisan migrate:refresh && \
 php artisan db:seed && \
 php artisan cache:clear && \
 php artisan config:clear && \
@@ -119,6 +119,7 @@ php artisan route:clear && \
 php artisan view:clear && \
 php artisan clear-compiled && \
 # Expose Port for the Application
+WORKDIR /
 EXPOSE 80
 #EXPOSE 443
 
