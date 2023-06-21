@@ -100,6 +100,7 @@ RUN composer install
 RUN npm install
 RUN chmod +x ./scripts/build.sh
 #CMD ["./scripts/build.sh"]
+RUN printenv
 RUN php artisan key:generate && \
 php artisan migrate && \
 php artisan db:seed && \
