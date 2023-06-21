@@ -63,9 +63,11 @@ RUN chown -R www-data:www-data /var/www/html
 RUN chown -R www-data:www-data /run/php
 
 RUN mkdir -p /var/www/winlearn
-RUN chown -R www-data:www-data /var/www/winlearn
 COPY  . /var/www/winlearn
 COPY ./.env.example /var/www/winlearn/.env
+RUN chown -R www-data:www-data /var/www/winlearn
+RUN chown -R www-data.www-data /var/www/winlearn/storage
+RUN chown -R www-data.www-data /var/www/winlearn/bootstrap/cache
 # Volume configuration
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html", "/var/run"]
 
