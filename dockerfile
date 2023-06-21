@@ -80,8 +80,10 @@ RUN /etc/init.d/mysql restart
 WORKDIR /var/www/winlearn
 RUN ls && pwd
 RUN composer install
-# Expose Port for the Application
-#EXPOSE 80
-EXPOSE 443
-
+WORKDIR /
 CMD ["./start.sh"]
+
+# Expose Port for the Application
+EXPOSE 80
+#EXPOSE 443
+
