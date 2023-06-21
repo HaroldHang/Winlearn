@@ -31,10 +31,12 @@ RUN apt install -y mysql-server
 #RUN dpkg -i mysql_all.deb
 RUN apt install php8.1-common php8.1-mysql php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-soap php8.1-zip php8.1-redis php8.1-intl -y
 #RUN curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+RUN ls ~/
 RUN touch ~/.bashrc && chmod +x ~/.bashrc
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 RUN . ~/.nvm/nvm.sh && . ~/.bashrc
-RUN . ~/.nvm/nvm.sh install v18.14.0
+RUN nvm install v18.14.0
 #RUN apt -y install nodejs
 RUN node -v
 RUN npm -v
