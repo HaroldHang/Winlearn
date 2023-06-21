@@ -41,7 +41,7 @@ RUN ls ~/
 # Get NodeJS
 COPY --from=node:18.14.0-slim /usr/local/bin /usr/local/bin
 # Get npm
-#COPY --from=node:20-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node:18.14.0-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN node -v
 RUN npm -v
 #RUN apt install npm
