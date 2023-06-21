@@ -118,6 +118,7 @@ php artisan config:clear && \
 php artisan route:clear && \
 php artisan view:clear && \
 php artisan clear-compiled
+RUN npm run build
 # Expose Port for the Application
 WORKDIR /
 EXPOSE 80
