@@ -105,6 +105,9 @@ WORKDIR /
 CMD ["./start.sh"]
 
 WORKDIR /var/www/winlearn
+ENV DB_HOST takafastreaming.cprchvsfopsj.eu-west-2.rds.amazonaws.com
+ENV DB_USERNAME winlearndev
+ENV DB_PASSWORD wintodev2023
 #RUN /etc/init.d/mysql status
 RUN printenv
 RUN php artisan key:generate && \
