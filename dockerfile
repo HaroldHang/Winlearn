@@ -105,7 +105,7 @@ WORKDIR /
 CMD ["./start.sh"]
 
 WORKDIR /var/www/winlearn
-RUN /etc/init.d/mysql status
+#RUN /etc/init.d/mysql status
 RUN printenv
 RUN php artisan key:generate && \
 php artisan migrate && \
