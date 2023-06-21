@@ -99,7 +99,15 @@ RUN ls && pwd
 RUN composer install
 RUN npm install
 RUN chmod +x ./scripts/build.sh
-CMD ["./scripts/build.sh"]
+#CMD ["./scripts/build.sh"]
+RUN php artisan key:generate && \
+php artisan migrate && \
+php artisan db:seed && \
+php artisan cache:clear && \
+php artisan config:clear && \
+php artisan route:clear && \
+php artisan view:clear && \
+php artisan clear-compiled && \
 
 WORKDIR /
 CMD ["./start.sh"]
