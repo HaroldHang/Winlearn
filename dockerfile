@@ -65,7 +65,7 @@ ENV nginx_conf /etc/nginx/nginx.conf
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV MYSQL_ROOT_PASSWORD
+ENV MYSQL_ROOT_PASSWORD ""
 # Enable PHP-fpm on nginx virtualhost configuration
 COPY ./docker-compose/nginx/default ${nginx_vhost}
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_conf} && echo "\ndaemon off;" >> ${nginx_conf}
