@@ -2,7 +2,7 @@ server {
     listen 80 default_server;
 
     root /var/www/winlearn/public;
-    index index.html index.htm index.nginx-debian.html;
+    index index.html index.htm index.php index.nginx-debian.html;
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-XSS-Protection "1; mode=block";
     add_header X-Content-Type-Options "nosniff";
