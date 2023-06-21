@@ -93,7 +93,6 @@ RUN ls /etc/init.d && ps
 RUN cat ${nginx_vhost}
 CMD ["/etc/init.d/nginx restart"]
 RUN /etc/init.d/mysql restart
-RUN /etc/init.d/mysql status
 
 WORKDIR /var/www/winlearn
 RUN ls && pwd
@@ -101,6 +100,12 @@ RUN composer install
 RUN npm install
 RUN chmod +x ./scripts/build.sh
 #CMD ["./scripts/build.sh"]
+
+WORKDIR /
+CMD ["./start.sh"]
+
+WORKDIR /var/www/winlearn
+RUN /etc/init.d/mysql status
 RUN printenv
 RUN php artisan key:generate && \
 php artisan migrate && \
@@ -110,10 +115,6 @@ php artisan config:clear && \
 php artisan route:clear && \
 php artisan view:clear && \
 php artisan clear-compiled && \
-
-WORKDIR /
-CMD ["./start.sh"]
-
 # Expose Port for the Application
 EXPOSE 80
 #EXPOSE 443
