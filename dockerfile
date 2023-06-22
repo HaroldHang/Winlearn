@@ -79,7 +79,7 @@ RUN chown -R www-data:www-data /run/php
 
 RUN mkdir -p /var/www/winlearn
 COPY  . /var/www/winlearn
-COPY ./.env.example /var/www/winlearn/.env
+COPY /etc/secrets/env_app /var/www/winlearn/.env
 RUN chown -R www-data:www-data /var/www/winlearn
 RUN chown -R www-data.www-data /var/www/winlearn/storage
 RUN chown -R www-data.www-data /var/www/winlearn/bootstrap/cache
@@ -105,9 +105,6 @@ WORKDIR /
 CMD ["./start.sh"]
 
 WORKDIR /var/www/winlearn
-ENV DB_HOST takafastreaming.cprchvsfopsj.eu-west-2.rds.amazonaws.com
-ENV DB_USERNAME winlearndev
-ENV DB_PASSWORD wintodev2023
 #RUN /etc/init.d/mysql status
 RUN printenv
 RUN php artisan key:generate && \
