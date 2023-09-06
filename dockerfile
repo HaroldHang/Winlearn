@@ -79,6 +79,7 @@ RUN chown -R www-data:www-data /var/www/html
 
 RUN mkdir -p /var/www/winlearn
 COPY  . /var/www/winlearn
+COPY env_file /var/www/winlearn/.env
 RUN chown -R www-data:www-data /var/www/winlearn
 RUN chown -R www-data.www-data /var/www/winlearn/storage
 RUN chown -R www-data.www-data /var/www/winlearn/bootstrap/cache
@@ -110,7 +111,8 @@ RUN php artisan key:generate && \
 php artisan cache:clear && \
 #php artisan config:clear && \
 php artisan route:clear && \
-php artisan view:clear
+php artisan view:clear && \
+php artisan clear-compiled
 RUN npm run build
 # Expose Port for the Application
 WORKDIR /
