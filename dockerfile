@@ -60,12 +60,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Define the ENV variable
 ENV nginx_vhost /etc/nginx/sites-available/default
-ENV php_conf /etc/php/8.1/fpm/php.ini
 ENV nginx_conf /etc/nginx/nginx.conf
+ENV php_conf /etc/php/8.1/fpm/php.ini
 ENV supervisor_conf /etc/supervisor/supervisord.conf
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV MYSQL_ROOT_PASSWORD ""
+#ENV MYSQL_ROOT_PASSWORD ""
 # Enable PHP-fpm on nginx virtualhost configuration
 COPY ./docker-compose/nginx/default ${nginx_vhost}
 RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_conf} && echo "\ndaemon off;" >> ${nginx_conf}
@@ -74,8 +74,8 @@ RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_conf} && echo "
 COPY ./docker-compose/supervisord.conf ${supervisor_conf}
 
 RUN mkdir -p /run/php
-RUN chown -R www-data:www-data /var/www/html
 RUN chown -R www-data:www-data /run/php
+RUN chown -R www-data:www-data /var/www/html
 
 RUN mkdir -p /var/www/winlearn
 COPY  . /var/www/winlearn
@@ -91,7 +91,7 @@ COPY ./scripts/start.sh /start.sh
 RUN chmod +x start.sh
 RUN ls /etc/init.d && ps
 RUN cat ${nginx_vhost}
-CMD ["/etc/init.d/nginx restart"]
+#CMD ["/etc/init.d/nginx restart"]
 RUN /etc/init.d/mysql restart
 
 WORKDIR /var/www/winlearn
