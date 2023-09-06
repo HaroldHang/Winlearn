@@ -79,7 +79,6 @@ RUN chown -R www-data:www-data /var/www/html
 
 RUN mkdir -p /var/www/winlearn
 COPY  . /var/www/winlearn
-COPY /etc/secrets/env_app /var/www/winlearn/.env
 RUN chown -R www-data:www-data /var/www/winlearn
 RUN chown -R www-data.www-data /var/www/winlearn/storage
 RUN chown -R www-data.www-data /var/www/winlearn/bootstrap/cache
