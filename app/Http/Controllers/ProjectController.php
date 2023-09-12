@@ -10,7 +10,7 @@ use App\Models\Project;
 class ProjectController extends Controller
 {
     /**
-     * Show the form for editing the specified resource.
+     * Page project for each language
      *
      * @param  string  $name
      * @return \Illuminate\Http\Response

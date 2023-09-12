@@ -1,135 +1,121 @@
-FROM debian:bullseye-slim
+# Download base image ubuntu 22.04
+FROM ubuntu:22.04
 
-LABEL maintainer="Harold Adjahi"
+# LABEL about the custom image
+LABEL maintainer="han20tuf@gmail.com"
+LABEL version="0.1"
+LABEL description="This is a custom Docker Image for PHP-FPM and Nginx."
 
-# Let the container know that there is no tty
-ENV DEBIAN_FRONTEND noninteractive
-ENV NGINX_VERSION 1.21.6-1~bullseye
+# Disable Prompt During Packages Installation
+ARG DEBIAN_FRONTEND=noninteractive
+ARG user
+ARG uid
+# Update Ubuntu Software repository
+RUN apt update
+RUN apt upgrade -y
+
+# Install nginx, php-fpm and supervisord from ubuntu repository
+RUN apt install -y nginx php-fpm supervisor
+RUN apt-get install -y \
+    git \
+    curl \
+    wget \
+    dpkg \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+RUN apt install -y mysql-server
+#RUN wget -O mysql_all.deb https://dev.mysql.com/get/mysql-apt-config_0.8.18-1_all.deb
+#RUN dpkg -i mysql_all.deb
+RUN apt install php8.1-common php8.1-mysql php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-soap php8.1-zip php8.1-redis php8.1-intl -y
+#RUN curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+RUN ls ~/
+#RUN touch ~/.bashrc && chmod +x ~/.bashrc
+#RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+#RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#RUN . ~/.nvm/nvm.sh && . ~/.bashrc
+#RUN nvm install v18.14.0
+#RUN apt -y install nodejs
+# Get NodeJS
+COPY --from=node:18.14.0-slim /usr/local/bin /usr/local/bin
+# Get npm
+COPY --from=node:18.14.0-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
+RUN node -v
+RUN npm -v
+#RUN apt install npm
+
+#RUN rm -rf /var/lib/apt/lists/*
+#RUN rm -rf mysql_all.deb
+#RUN apt clean
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+#Create system user to run Composer and Artisan Commands
+#RUN useradd -G www-data,root -u $uid -d /home/$user $user
+#RUN mkdir -p /home/$user/.composer && \
+#    chown -R $user:$user /home/$user
+
+# Define the ENV variable
+ENV nginx_vhost /etc/nginx/sites-available/default
+ENV nginx_conf /etc/nginx/nginx.conf
 ENV php_conf /etc/php/8.1/fpm/php.ini
-ENV fpm_conf /etc/php/8.1/fpm/pool.d/www.conf
-ENV COMPOSER_VERSION 2.5.4
-
-# Install Basic Requirements
-RUN buildDeps='curl gcc make autoconf libc-dev zlib1g-dev pkg-config' \
-    && set -x \
-    && apt-get update \
-    && apt-get install --no-install-recommends $buildDeps --no-install-suggests -q -y gnupg2 dirmngr wget apt-transport-https lsb-release ca-certificates \
-    && \
-    NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
-            found=''; \
-            for server in \
-                    ha.pool.sks-keyservers.net \
-                    hkp://keyserver.ubuntu.com:80 \
-                    hkp://p80.pool.sks-keyservers.net:80 \
-                    pgp.mit.edu \
-            ; do \
-                    echo "Fetching GPG key $NGINX_GPGKEY from $server"; \
-                    apt-key adv --batch --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$NGINX_GPGKEY" && found=yes && break; \
-            done; \
-    test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GPGKEY" && exit 1; \
-    echo "deb http://nginx.org/packages/mainline/debian/ bullseye nginx" >> /etc/apt/sources.list \
-    && wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
-    && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list \
-    && apt-get update \
-    && apt-get install --no-install-recommends --no-install-suggests -q -y \
-            apt-utils \
-            nano \
-            zip \
-            unzip \
-            python3-pip \
-            python-setuptools \
-            git \
-            libmemcached-dev \
-            libmemcached11 \
-            libmagickwand-dev \
-            nginx=${NGINX_VERSION} \
-            php8.1-fpm \
-            php8.1-cli \
-            php8.1-bcmath \
-            php8.1-dev \
-            php8.1-common \
-            php8.1-opcache \
-            php8.1-readline \
-            php8.1-mbstring \
-            php8.1-curl \
-            php8.1-gd \
-            php8.1-imagick \
-            php8.1-mysql \
-            php8.1-zip \
-            php8.1-pgsql \
-            php8.1-intl \
-            php8.1-xml \
-            php-pear \
-    && pecl -d php_suffix=8.1 install -o -f redis memcached \
-    && mkdir -p /run/php \
-    && pip install wheel \
-    && pip install supervisor \
-    && pip install git+https://github.com/coderanger/supervisor-stdout \
-    && echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d \
-    && rm -rf /etc/nginx/conf.d/default.conf \
-    && sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" ${php_conf} \
-    && sed -i -e "s/memory_limit\s*=\s*.*/memory_limit = 256M/g" ${php_conf} \
-    && sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" ${php_conf} \
-    && sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" ${php_conf} \
-    && sed -i -e "s/variables_order = \"GPCS\"/variables_order = \"EGPCS\"/g" ${php_conf} \
-    && sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/8.1/fpm/php-fpm.conf \
-    && sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" ${fpm_conf} \
-    && sed -i -e "s/pm.max_children = 5/pm.max_children = 4/g" ${fpm_conf} \
-    && sed -i -e "s/pm.start_servers = 2/pm.start_servers = 3/g" ${fpm_conf} \
-    && sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = 2/g" ${fpm_conf} \
-    && sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = 4/g" ${fpm_conf} \
-    && sed -i -e "s/pm.max_requests = 500/pm.max_requests = 200/g" ${fpm_conf} \
-    && sed -i -e "s/www-data/nginx/g" ${fpm_conf} \
-    && sed -i -e "s/^;clear_env = no$/clear_env = no/" ${fpm_conf} \
-    && echo "extension=redis.so" > /etc/php/8.1/mods-available/redis.ini \
-    && echo "extension=memcached.so" > /etc/php/8.1/mods-available/memcached.ini \
-    && echo "extension=imagick.so" > /etc/php/8.1/mods-available/imagick.ini \
-    && ln -sf /etc/php/8.1/mods-available/redis.ini /etc/php/8.1/fpm/conf.d/20-redis.ini \
-    && ln -sf /etc/php/8.1/mods-available/redis.ini /etc/php/8.1/cli/conf.d/20-redis.ini \
-    && ln -sf /etc/php/8.1/mods-available/memcached.ini /etc/php/8.1/fpm/conf.d/20-memcached.ini \
-    && ln -sf /etc/php/8.1/mods-available/memcached.ini /etc/php/8.1/cli/conf.d/20-memcached.ini \
-    && ln -sf /etc/php/8.1/mods-available/imagick.ini /etc/php/8.1/fpm/conf.d/20-imagick.ini \
-    && ln -sf /etc/php/8.1/mods-available/imagick.ini /etc/php/8.1/cli/conf.d/20-imagick.ini \
-    # Install Composer
-    && curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
-    && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
-    && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }" \
-    && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --version=${COMPOSER_VERSION} \
-    && rm -rf /tmp/composer-setup.php \
-    # Clean up
-    && rm -rf /tmp/pear \
-    && apt-get purge -y --auto-remove $buildDeps \
-    && apt-get clean \
-    && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -fsSL https://deb.nodesource.com/setup_18.14.0 | sudo -E bash - \
-    && apt-get install nodejs
-
-
-# Supervisor config
-COPY ./conf/supervisord.conf /etc/supervisord.conf
-
-# Override nginx's default config
-COPY ./conf/nginx/site.conf /etc/nginx/conf.d/default.conf
-
-# Copy Scripts
-COPY ./scripts/00-laravel-deploy.sh /start.sh
-RUN chmod a+x start.sh
-
-# Override default nginx welcome page
-COPY . /usr/share/nginx/html
-
-# Laravel config
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
-
+ENV supervisor_conf /etc/supervisor/supervisord.conf
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
+#ENV MYSQL_ROOT_PASSWORD ""
+# Enable PHP-fpm on nginx virtualhost configuration
+COPY ./docker-compose/nginx/default ${nginx_vhost}
+RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' ${php_conf} && echo "\ndaemon off;" >> ${nginx_conf}
 
-#RUN cd /usr/share/nginx/html && cp .env.example .env && composer install
-RUN cd /usr/share/nginx/html && composer install && npm run build
+# Copy supervisor configuration
+COPY ./docker-compose/supervisord.conf ${supervisor_conf}
 
+RUN mkdir -p /run/php
+RUN chown -R www-data:www-data /run/php
+RUN chown -R www-data:www-data /var/www/html
+
+RUN mkdir -p /var/www/winlearn
+COPY  . /var/www/winlearn
+COPY env_file /var/www/winlearn/.env
+RUN chown -R www-data:www-data /var/www/winlearn
+RUN chown -R www-data.www-data /var/www/winlearn/storage
+RUN chown -R www-data.www-data /var/www/winlearn/bootstrap/cache
+# Volume configuration
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html", "/var/run"]
+
+# Copy start.sh script and define default command for the container
+COPY ./scripts/start.sh /start.sh
+RUN chmod +x start.sh
+RUN ls /etc/init.d && ps
+RUN cat ${nginx_vhost}
+#CMD ["/etc/init.d/nginx restart"]
+RUN /etc/init.d/mysql restart
+
+WORKDIR /var/www/winlearn
+RUN ls && pwd
+RUN composer install
+RUN npm install
+RUN chmod +x ./scripts/build.sh
+#CMD ["./scripts/build.sh"]
+
+WORKDIR /
+CMD ["./start.sh"]
+
+WORKDIR /var/www/winlearn
+#RUN /etc/init.d/mysql status
+RUN printenv
+RUN php artisan key:generate && \
+php artisan cache:clear && \
+#php artisan config:clear && \
+php artisan route:clear && \
+php artisan view:clear && \
+php artisan clear-compiled
+RUN npm run build
+# Expose Port for the Application
+WORKDIR /
 EXPOSE 80
+#EXPOSE 443
 
-CMD ["/start.sh"]
