@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    // Authenticate user
     public function login(Request $request)
     {
 
@@ -25,6 +26,7 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
+    // Register new user
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [

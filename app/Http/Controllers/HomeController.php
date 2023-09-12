@@ -9,8 +9,7 @@ use App\Models\Language;
 
 class HomeController extends Controller
 {
-    //
-
+    // Routing to HomePage
     public function index(Request $request) {
         $languages = Language::paginate(6);
         //dd($languages);

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class LanguageController extends Controller
 {
-    
+
     /**
-     * Show the form for editing the specified resource.
+     * Show the description page of the programming language.
      *
      * @param  string  $name
      * @return \Illuminate\Http\Response
